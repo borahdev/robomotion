@@ -12,7 +12,7 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
     volumes:
-      - ./robomotion:/home/robomotion/.config/robomotion
+      - ./persistence:/home/robomotion/.config/robomotion
     restart: unless-stopped
     depends_on:
       - sqlite

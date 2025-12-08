@@ -5,7 +5,7 @@
 node_modules/
 
 # Robomotion runtime directories
-robomotion/
+persistence/
 sqlite_data/
 redis_data/
 
