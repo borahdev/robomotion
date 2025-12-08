@@ -4,8 +4,10 @@
 # Node modules
 node_modules/
 
-# Robomotion runtime directory
+# Robomotion runtime directories
 robomotion/
+sqlite_data/
+redis_data/
 
 # Development container (local only)
 .devcontainer/

@@ -1,7 +1,7 @@
 services:
   robomotion:
     image: gcr.io/robomotion/robomotion:latest
-    container_name: robomotion_prod
+    container_name: affectionate_borg
     environment:
       - EMAIL=${ROBOMOTION_EMAIL:?Robomotion email is required}
       - WORKSPACE=${ROBOMOTION_WORKSPACE:?Robomotion workspace is required}
@@ -12,8 +12,7 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
     volumes:
-      - robomotion_config:/home/robomotion/.config/robomotion
-      - ./robomotion:/home/robomotion/robomotion
+      - ./robomotion:/home/robomotion/.config/robomotion
     restart: unless-stopped
     depends_on:
       - sqlite
@@ -24,12 +23,12 @@ services:
     container_name: sqlite
     command: sleep infinity
     restart: unless-stopped
+    volumes:
+      - ./sqlite_data:/data
 
   redis:
     image: redis:alpine
     container_name: redis
     restart: unless-stopped
-
-volumes:
-  robomotion_config:
-    driver: local
+    volumes:
+      - ./redis_data:/data

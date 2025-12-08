@@ -37,5 +37,6 @@ Required variables (enforced by Docker Compose):
 - **sqlite**: Alpine Linux container for SQLite database
 - **redis**: Redis Alpine container for caching and queuing
 - Data persists in:
-  - Docker volume `robomotion_config` for Robomotion configuration
-  - Local directory `./robomotion/` for files and downloads
+  - Local directory `./robomotion/` for Robomotion configuration, downloads, and files
+  - Local directory `./sqlite_data/` for SQLite database files
+  - Docker volume `redis_data` for Redis persistence
