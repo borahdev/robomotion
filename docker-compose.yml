@@ -1,0 +1,35 @@
+services:
+  robomotion:
+    image: gcr.io/robomotion/robomotion:latest
+    container_name: robomotion_prod
+    environment:
+      - EMAIL=${ROBOMOTION_EMAIL:?Robomotion email is required}
+      - WORKSPACE=${ROBOMOTION_WORKSPACE:?Robomotion workspace is required}
+      - ROBOT_ID=${ROBOMOTION_ROBOT_ID:?Robomotion robot ID is required}
+      - ROBOT_TOKEN=${ROBOMOTION_ROBOT_TOKEN:?Robomotion robot token is required}
+      - SQLITE_HOST=sqlite
+      - SQLITE_DATABASE=/data/robomotion.db
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - robomotion_config:/home/robomotion/.config/robomotion
+      - ./robomotion:/home/robomotion/robomotion
+    restart: unless-stopped
+    depends_on:
+      - sqlite
+      - redis
+
+  sqlite:
+    image: alpine:latest
+    container_name: sqlite
+    command: sleep infinity
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
+
+volumes:
+  robomotion_config:
+    driver: local

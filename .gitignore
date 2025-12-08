@@ -1,0 +1,28 @@
+# Environment files
+.env
+
+# Node modules
+node_modules/
+
+# Robomotion runtime directory
+robomotion/
+
+# Development container (local only)
+.devcontainer/
+
+# Claude Code
+.claude
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
