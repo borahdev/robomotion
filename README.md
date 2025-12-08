@@ -5,13 +5,22 @@ Production setup for Robomotion with Docker Compose.
 ## Setup
 
 1. Copy environment template:
+
    ```bash
    cp .env.example .env
    ```
 
 2. Edit `.env` with your Robomotion credentials
 
-3. Deploy:
+3. Set permissions for persistence directory:
+
+   ```bash
+   sudo chown -R 1200:1201 persistence
+   ```
+
+   ⚠️ **Important**: The chown command is required for Robomotion to write files. Robomotion container runs as UID 1200:1201.
+
+4. Deploy:
    ```bash
    docker compose up -d
    ```
@@ -19,6 +28,7 @@ Production setup for Robomotion with Docker Compose.
 ## Environment Variables
 
 Required variables (enforced by Docker Compose):
+
 - `ROBOMOTION_EMAIL`: Your Robomotion account email
 - `ROBOMOTION_WORKSPACE`: Your workspace domain
 - `ROBOMOTION_ROBOT_ID`: Your robot ID
@@ -37,6 +47,6 @@ Required variables (enforced by Docker Compose):
 - **sqlite**: Alpine Linux container for SQLite database
 - **redis**: Redis Alpine container for caching and queuing
 - Data persists in:
-  - Local directory `./robomotion/` for Robomotion configuration, downloads, and files
+  - Local directory `./persistence/` for Robomotion configuration, downloads, and files
   - Local directory `./sqlite_data/` for SQLite database files
-  - Docker volume `redis_data` for Redis persistence
+  - Local directory `./redis_data/` for Redis persistence
