@@ -16,7 +16,6 @@ services:
     restart: unless-stopped
     depends_on:
       - sqlite
-      - redis
 
   redis:
     image: redis:alpine
