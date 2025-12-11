@@ -7,8 +7,6 @@ services:
       - WORKSPACE=${ROBOMOTION_WORKSPACE:?Robomotion workspace is required}
       - ROBOT_ID=${ROBOMOTION_ROBOT_ID:?Robomotion robot ID is required}
       - ROBOT_TOKEN=${ROBOMOTION_ROBOT_TOKEN:?Robomotion robot token is required}
-      - SQLITE_HOST=sqlite
-      - SQLITE_DATABASE=/data/robomotion.db
       - REDIS_HOST=redis
       - REDIS_PORT=6379
     volumes:
@@ -19,14 +17,6 @@ services:
     depends_on:
       - sqlite
       - redis
-
-  sqlite:
-    image: alpine:latest
-    container_name: sqlite
-    command: sleep infinity
-    restart: unless-stopped
-    volumes:
-      - ./sqlite_data:/data
 
   redis:
     image: redis:alpine
