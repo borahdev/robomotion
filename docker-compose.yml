@@ -11,6 +11,7 @@ services:
       - REDIS_PORT=6379
     volumes:
       - ./persistence:/home/robomotion/.config/robomotion
+      - ./sqlite_data:/data
     ports:
       - "9090:9090"
     restart: unless-stopped
