@@ -24,3 +24,12 @@ services:
     restart: unless-stopped
     volumes:
       - ./redis_data:/data
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:latest
+    container_name: cloudbeaver
+    restart: unless-stopped
+    ports:
+      - "9091:8978"
+    volumes:
+      - ./cloudbeaver_config:/opt/cloudbeaver/workspace
+      - ./sqlite_data:/mnt/sqlite_data
