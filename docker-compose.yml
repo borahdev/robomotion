@@ -23,4 +23,5 @@ services:
     volumes:
       - ./sqlite_data:/data
     working_dir: /data
+    command: tail -f /dev/null
     restart: unless-stopped
