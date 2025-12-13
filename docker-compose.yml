@@ -7,8 +7,6 @@ services:
       - WORKSPACE=${ROBOMOTION_WORKSPACE:?Robomotion workspace is required}
       - ROBOT_ID=${ROBOMOTION_ROBOT_ID:?Robomotion robot ID is required}
       - ROBOT_TOKEN=${ROBOMOTION_ROBOT_TOKEN:?Robomotion robot token is required}
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
     volumes:
       - ./persistence:/home/robomotion/.config/robomotion
       - ./files:/files
@@ -16,21 +14,13 @@ services:
     ports:
       - "9090:9090"
     restart: unless-stopped
-    depends_on:
-      - redis
 
-  redis:
-    image: redis:alpine
-    container_name: redis
-    restart: unless-stopped
+  sqlite-cli:
+    image: alpine/sqlite:latest
+    container_name: sqlite-cli
+    stdin_open: true
+    tty: true
     volumes:
-      - ./redis_data:/data
-  cloudbeaver:
-    image: dbeaver/cloudbeaver:latest
-    container_name: cloudbeaver
+      - ./sqlite_data:/data
+    working_dir: /data
     restart: unless-stopped
-    ports:
-      - "9091:8978"
-    volumes:
-      - ./cloudbeaver_config:/opt/cloudbeaver/workspace
-      - ./sqlite_data:/mnt/sqlite_data
