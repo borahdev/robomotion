@@ -15,13 +15,16 @@ services:
       - "9090:9090"
     restart: unless-stopped
 
-  sqlite-cli:
+  sqlite:
     image: alpine/sqlite:latest
-    container_name: sqlite-cli
+    container_name: sqlite
     stdin_open: true
     tty: true
     volumes:
       - ./sqlite_data:/data
     working_dir: /data
-    command: tail -f /dev/null
+    # 1. Override the default entrypoint to use shell
+    entrypoint: /bin/sh
+    # 2. Pass the keep-alive command as an argument to the shell
+    command: -c "tail -f /dev/null"
     restart: unless-stopped
